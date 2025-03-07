@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <header>
 	<div>
-		<span>로그인</span> | <span>회원가입</span>
+		<span><a href="#">로그인</a></span> | <span><a href="member/memberJoin.jsp">회원가입</a></span>
 	</div>
 	<h1>JSP Study Site</h1>
 	<nav>
