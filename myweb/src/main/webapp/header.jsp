@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <header>
 	<div>
-		<span><a href="#">로그인</a></span> | <span><a href="member/memberJoin.jsp">회원가입</a></span>
+		<span><a href="#">로그인</a></span> | <span><a href="/myweb/member/memberJoin.jsp">회원가입</a></span>
 	</div>
 	<h1>JSP Study Site</h1>
 	<nav>
 		<ul>
-			<li><a href="index.jsp">Home</a></li>
-			<li><a href="introduce.jsp">Profile</a></li>
+			<li><a href="/myweb/index.jsp">Home</a></li>
+			<li><a href="/myweb/introduce.jsp">Profile</a></li>
 			<li><a href="#">자유게시판</a></li>
 			<li><a href="#">파일업로드</a></li>
 			<li><a href="#">방명록</a></li>

@@ -20,6 +20,14 @@ table {
 	margin: 0px auto;
 }
 </style>
+
+<script>
+	function openPopup() {
+		window
+				.open("idCheck.jsp", "중복검사",
+						"width=400,height=300,top=200,left=200,scrollbars=no,resizable=no");
+	}
+</script>
 </head>
 <body>
 	<%@include file="../header.jsp"%>
@@ -32,7 +40,9 @@ table {
 					<table>
 						<tr>
 							<th>ID</th>
-							<td><input type="text" name="id" /></td>
+							<td><input type="text" name="id" readonly /></td>
+							<td><input type="button" name="idCheck" value="중복검사"
+								onclick="openPopup();" /></td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
