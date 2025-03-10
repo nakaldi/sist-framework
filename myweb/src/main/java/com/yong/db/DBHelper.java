@@ -1,4 +1,4 @@
-package com.yong.config;
+package com.yong.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
