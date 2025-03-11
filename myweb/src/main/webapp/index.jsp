@@ -20,6 +20,8 @@
 				<li><a href="cal.jsp">cal.jsp</a></li>
 				<li><a href="emp.jsp">emp.jsp</a></li>
 				<li><a href="emp/emp2.jsp">사원관리프로그램(Beans방식)</a></li>
+				<li><a href="phonebook/phonebookForm.jsp">전화번호부(복습)</a></li>
+				
 			</ul>
 		</article>
 	</section>
