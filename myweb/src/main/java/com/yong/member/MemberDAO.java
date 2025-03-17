@@ -48,4 +48,41 @@ public class MemberDAO {
 		return true;
 	}
 
+	/**
+	 * @return 아이디가 없으면 1, 비밀번호가 다르면 2, 모두 일치하면 3
+	 */
+	public int loginCheck(String id, String pwd) {
+		if (!idCheck(id)) {
+			return 1;
+		}
+		String sql = "SELECT * FROM jsp_member WHERE id = ? AND pwd = ?";
+		try (Connection conn = DBHelper.connect(); PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, id);
+			ps.setString(2, pwd);
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.isBeforeFirst()) {
+					return 3;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 2;
+	}
+
+	public String getUserInfo(String id) {
+		String sql = "SELECT name FROM jsp_member WHERE id = ?";
+		try (Connection conn = DBHelper.connect(); PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setString(1, id);
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.next()) {
+					return rs.getString("name");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

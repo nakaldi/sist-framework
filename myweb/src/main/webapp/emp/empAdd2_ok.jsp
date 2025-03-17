@@ -8,6 +8,6 @@ int result = edao.empAdd(edto);
 String msg = result > 0 ? "사원등록성공(beans)" : "사원등록실패(beans)";
 %>
 <script>
-window.alert('<%=msg%>');
+	window.alert('<%=msg%>');
 	location.href = 'emp2.jsp';
 </script>
