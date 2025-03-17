@@ -61,6 +61,7 @@ function openPopup(){
 				<li><a href="emp/emp2.jsp">사원관리프로그램(Beans방식)</a></li>
 				<li><a href="phonebook/phonebookForm.jsp">전화번호부(복습)</a></li>
 				<li><a href="filebbs/fileBbs.jsp">심플 자료실</a></li>
+				<li><a href="imggallery/imgGallery.jsp">이미지 갤러리</a></li>
 
 			</ul>
 		</article>

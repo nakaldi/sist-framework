@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+    String sid = (session != null) ? (String) session.getAttribute("sid") : null;
+    if (sid == null) {
+        response.sendRedirect("/myweb/index.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,17 +18,17 @@
 	<%@include file="/header.jsp"%>
 	<section>
 		<article>
-			<h2>파일 업로드</h2>
-			<form name="fileBbsUpload" action="fileBbsUpload_ok.jsp"
+			<h2>이미지 업로드</h2>
+			<form name="imgGalleryUpload" action="imgGalleryUpload_ok.jsp"
 				method="post" enctype="multipart/form-data">
 				<fieldset>
-					<legend>파일 올리기</legend>
+					<legend>이미지 올리기</legend>
 					<ul>
-						<li><label>업로드파일</label> <input type="file" name="upload" />
-						</li>
+						<li><label>업로드파일</label> <input type="file" name="upload"
+							accept=".jpg, .png" /></li>
 					</ul>
 					<div>
-						<input type="submit" value="파일올리기" />
+						<input type="submit" value="이미지올리기" />
 					</div>
 				</fieldset>
 			</form>

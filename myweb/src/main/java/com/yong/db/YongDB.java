@@ -1,6 +1,7 @@
 package com.yong.db;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -20,7 +21,7 @@ public class YongDB {
 		}
 	}
 
-	public static Connection getConn() throws Exception {
+	public static Connection getConn() throws SQLException {
 		return ds.getConnection();
 	}
 

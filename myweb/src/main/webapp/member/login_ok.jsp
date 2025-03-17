@@ -10,6 +10,7 @@ String pwd = request.getParameter("pwd");
 if (memberDAO.loginCheck(id, pwd) == 3) {
 	String name = memberDAO.getUserInfo(id);
 	session.setAttribute("loggedInUser", name);
+	session.setAttribute("sid", id);
 
 	Cookie lastLoggedinId = new Cookie("lastLoggedInId", id);
 	int maxAge = 0;

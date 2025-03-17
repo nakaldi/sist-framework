@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 session.removeAttribute("loggedInUser");
+session.removeAttribute("sid");
 String redirectURL = request.getHeader("referer"); // 이전 페이지 URL 가져오기
 if (redirectURL == null || redirectURL.isEmpty()) {
     redirectURL = "myweb/index.jsp"; // 기본 페이지 설정
