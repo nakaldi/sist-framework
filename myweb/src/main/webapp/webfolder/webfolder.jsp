@@ -1,7 +1,9 @@
+<%@page import="com.yong.webfolder.WebFolder"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.io.File"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +40,7 @@ meter {
 }
 </style>
 </head>
+
 <%
 String sid = (String) session.getAttribute("sid");
 if (sid == null) {
@@ -49,17 +52,15 @@ if (sid == null) {
 <%
 return;
 }
-String rootUrl = request.getServletContext().getRealPath("/");
-File uploadFolder = new File(rootUrl + "/webfolder/upload/");
-File sidFolder = new File(rootUrl + "/webfolder/upload/" + sid);
-if (!uploadFolder.exists()) {
-uploadFolder.mkdir();
-}
-if (!sidFolder.exists()) {
-sidFolder.mkdir();
-}
-final long MAX_FOLDER_SIZE = 1024 * 1024 * 20;
-long currentFolderSize = Arrays.stream(sidFolder.listFiles()).mapToLong(f -> f.length()).sum();
+%>
+
+<%
+WebFolder webFolder = new WebFolder(request.getServletContext().getRealPath("/webfolder/upload"),sid);
+session.setAttribute("webFolder", webFolder);
+
+final long MAX_FOLDER_SIZE = webFolder.getMAX_FOLDER_SIZE();
+long currentFolderSize = webFolder.getUsedSize();
+long freeFolderSize = MAX_FOLDER_SIZE-currentFolderSize;
 %>
 <body>
 	<%@include file="/header.jsp"%>
@@ -74,7 +75,7 @@ long currentFolderSize = Arrays.stream(sidFolder.listFiles()).mapToLong(f -> f.l
 					<li><label>사용용량 : </label> <meter max="<%=MAX_FOLDER_SIZE%>"
 							min="0" value="<%=currentFolderSize%>"></meter><%=currentFolderSize%>(byte)</li>
 					<li><label>남은용량 : </label> <meter max="<%=MAX_FOLDER_SIZE%>"
-							min="0" value="<%=MAX_FOLDER_SIZE - currentFolderSize%>"></meter><%=MAX_FOLDER_SIZE - currentFolderSize%>(byte)</li>
+							min="0" value="<%=freeFolderSize%>"></meter><%=freeFolderSize%>(byte)</li>
 				</ul>
 			</fieldset>
 		</article>
