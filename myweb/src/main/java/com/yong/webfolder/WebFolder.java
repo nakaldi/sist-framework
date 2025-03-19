@@ -47,4 +47,22 @@ public class WebFolder {
 		return Arrays.stream(folder.listFiles()).mapToLong(f -> f.isFile() ? f.length() : sumUsedSize(f)).sum();
 	}
 
+	public File getFile() {
+		return userFolder;
+	}
+
+	public boolean deleteFile(File target) {
+		System.out.println(target.getAbsolutePath() + "에 도달함--------------------");
+		boolean deleted = false;
+		if (target.isDirectory()) {
+			if (target.listFiles().length > 0) {
+				Arrays.stream(target.listFiles()).forEach(t -> deleteFile(t));
+			}
+		}
+		System.out.println(target.getAbsolutePath() + "는 빈 폴더 or 파일이고 지우기 시도");
+		deleted = target.delete();
+
+		System.out.println(target.getAbsolutePath() + " 파일 삭제 " + (deleted ? "성공" : "실패"));
+		return deleted;
+	}
 }

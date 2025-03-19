@@ -1,3 +1,5 @@
+
+<%@page import="java.net.URLEncoder"%>
 <%@page import="com.yong.webfolder.WebFolder"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.io.File"%>
@@ -22,6 +24,7 @@ section li {
 
 section label {
 	width: 100px;
+	float: left;
 }
 
 table {
@@ -29,6 +32,7 @@ table {
 	margin: 0px auto;
 	border-top: 3px double darkblue;
 	border-bottom: 3px double darkblue;
+	text-align: center;
 }
 
 table th {
@@ -36,7 +40,8 @@ table th {
 }
 
 meter {
-	width: 200px;
+	width: 300px;
+	margin: 10px auto;
 }
 </style>
 </head>
@@ -55,12 +60,12 @@ return;
 %>
 
 <%
-WebFolder webFolder = new WebFolder(request.getServletContext().getRealPath("/webfolder/upload"),sid);
+WebFolder webFolder = new WebFolder(request.getServletContext().getRealPath("/webfolder/upload"), sid);
 session.setAttribute("webFolder", webFolder);
 
 final long MAX_FOLDER_SIZE = webFolder.getMAX_FOLDER_SIZE();
 long currentFolderSize = webFolder.getUsedSize();
-long freeFolderSize = MAX_FOLDER_SIZE-currentFolderSize;
+long freeFolderSize = MAX_FOLDER_SIZE - currentFolderSize;
 %>
 <body>
 	<%@include file="/header.jsp"%>
@@ -94,6 +99,37 @@ long freeFolderSize = MAX_FOLDER_SIZE-currentFolderSize;
 							<th>삭제</th>
 						</tr>
 					</thead>
+					<tbody>
+						<%
+						File[] files = webFolder.getFile().listFiles();
+						if (files.length == 0) {
+						%>
+						<tr>
+							<td colspan="3" align="center">파일이 없습니다</td>
+						</tr>
+						<%
+						} else {
+						for (File f : files) {
+						%>
+						<tr>
+							<td><%=f.isFile() ? "파일" : "폴더"%></td>
+							<td><%=f.getName()%></td>
+							<td><form name="webfolder_delete"
+									action="webfolder_delete.jsp" method="post"
+									onsubmit="return confirm('정말 삭제하시겠습니까?');">
+									<input type="hidden" name="absolutePath"
+										value="<%=URLEncoder.encode(f.getAbsolutePath(), "UTF-8")%>" />
+									<input type="hidden" name="fileName"
+										value="<%=URLEncoder.encode(f.getName(), "UTF-8")%>" /> <input
+										type="submit" value="삭제" />
+								</form></td>
+						</tr>
+						<%
+						}
+						}
+						%>
+
+					</tbody>
 				</table>
 			</fieldset>
 
