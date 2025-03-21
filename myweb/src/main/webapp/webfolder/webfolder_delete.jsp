@@ -13,5 +13,9 @@ String msg = webFolder.deleteFile(targetFile) ? "성공" : "실패";
 %>
 <script>
 	window.alert('파일 삭제 <%=msg%>');
-	window.location.href = 'webfolder.jsp'
+	if (document.referrer) {
+	    window.location.href = document.referrer;
+	} else {
+	    alert("직전 페이지 정보가 없습니다.");
+	}
 </script>

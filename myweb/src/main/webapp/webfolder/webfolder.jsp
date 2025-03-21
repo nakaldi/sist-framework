@@ -1,4 +1,5 @@
 
+<%@page import="java.net.URLDecoder"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="com.yong.webfolder.WebFolder"%>
 <%@page import="java.util.Arrays"%>
@@ -63,6 +64,7 @@ return;
 WebFolder webFolder = new WebFolder(request.getServletContext().getRealPath("/webfolder/upload"), sid);
 session.setAttribute("webFolder", webFolder);
 
+final String USER_FOLDER_PATH = request.getContextPath() + "/webfolder/upload/" + sid + "/";
 final long MAX_FOLDER_SIZE = webFolder.getMAX_FOLDER_SIZE();
 long currentFolderSize = webFolder.getUsedSize();
 long freeFolderSize = MAX_FOLDER_SIZE - currentFolderSize;
@@ -101,7 +103,13 @@ long freeFolderSize = MAX_FOLDER_SIZE - currentFolderSize;
 					</thead>
 					<tbody>
 						<%
-						File[] files = webFolder.getFile().listFiles();
+						File currentFile = webFolder.getUserFolder();
+
+						String currentPath = request.getParameter("currentPath");
+						if (currentPath != null && !("\\".equals(currentPath))) {
+							currentFile = new File(currentFile.getAbsolutePath() + URLDecoder.decode(currentPath, "UTF-8"));
+						}
+						File[] files = currentFile.listFiles();
 						if (files.length == 0) {
 						%>
 						<tr>
@@ -112,8 +120,12 @@ long freeFolderSize = MAX_FOLDER_SIZE - currentFolderSize;
 						for (File f : files) {
 						%>
 						<tr>
-							<td><%=f.isFile() ? "파일" : "폴더"%></td>
-							<td><%=f.getName()%></td>
+							<td><%=f.isFile() ? "FILE" : "DIR"%></td>
+							<td><a
+								href="<%=f.isDirectory()
+		? "?currentPath=" + URLEncoder
+				.encode(f.getAbsolutePath().replace(webFolder.getUserFolder().getAbsolutePath(), ""), "UTF-8")
+		: USER_FOLDER_PATH + f.getName()%>"><%=f.getName()%></a></td>
 							<td><form name="webfolder_delete"
 									action="webfolder_delete.jsp" method="post"
 									onsubmit="return confirm('정말 삭제하시겠습니까?');">

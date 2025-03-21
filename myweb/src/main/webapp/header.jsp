@@ -31,7 +31,7 @@
 		<ul>
 			<li><a href="/myweb/index.jsp">Home</a></li>
 			<li><a href="/myweb/introduce.jsp">Profile</a></li>
-			<li><a href="#">자유게시판</a></li>
+			<li><a href="/myweb/bbs/bbsList.jsp">자유게시판</a></li>
 			<li><a href="/myweb/webfolder/webfolder.jsp">드라이브</a></li>
 			<li><a href="#">방명록</a></li>
 		</ul>
