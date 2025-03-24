@@ -26,44 +26,27 @@ table th {
 	background-color: skyblue;
 }
 
-.pagination-container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 20px;
-	width: 650px;
-	margin: 20px auto;
-}
-
-.pagination {
-	display: inline-block;
-}
-
-.pagination a {
-	margin: 0 5px;
-	text-decoration: none;
-	color: black;
-}
-
-.pagination a.active {
-	color: blue;
-	font-weight: bold;
-}
-
-.pagination a:hover {
-	text-decoration: underline;
-}
 </style>
 </head>
 <%
-final int VIEW_POST_COUNT = 10;
-String postsPage = request.getParameter("page");
-if (postsPage == null || postsPage.length() == 0) {
-	postsPage = "1";
-}
 
 BbsDAO bbsDAO = new BbsDAO();
-List<BbsDTO> posts = bbsDAO.findAllPosts();
+
+String currentPage_str = request.getParameter("currentPage");
+int currentPage = currentPage_str==null?1:Integer.parseInt(currentPage_str);
+int postsCount = bbsDAO.getCountFromPosts();
+int postsPerPage = 5;
+int pagesPerPage = 5;
+
+int pagesCount = (postsCount / postsPerPage) + 1;
+if (postsCount % postsPerPage == 0) {
+	pagesCount--;
+}
+
+int currentPageGroup = currentPage / pagesPerPage;
+if (currentPage % pagesPerPage == 0) {
+	currentPageGroup--;
+}
 %>
 <body>
 	<%@include file="/header.jsp"%>
@@ -81,6 +64,7 @@ List<BbsDTO> posts = bbsDAO.findAllPosts();
 		<tbody>
 
 			<%
+			List<BbsDTO> posts = bbsDAO.findPostsWithOffsetAndLimit(currentPage*postsPerPage, postsPerPage);
 			if (posts == null || posts.size() == 0) {
 			%>
 			<tr>
@@ -92,7 +76,7 @@ List<BbsDTO> posts = bbsDAO.findAllPosts();
 			%>
 			<tr>
 				<td><%=post.getId()%></td>
-				<td><%=post.getTitle()%></td>
+				<td><a href="bbsContent.jsp?id=<%=post.getId()%>"><%=post.getTitle()%></a></td>
 				<td><%=post.getAuthor()%></td>
 				<td><%=post.getCreatedAt()%></td>
 				<td><%=post.getViewCount()%></td>
@@ -108,12 +92,33 @@ List<BbsDTO> posts = bbsDAO.findAllPosts();
 
 	<!-- 페이지네이션과 글쓰기 버튼 컨테이너 -->
 	<div class="pagination-container">
-		<div class="pagination">
-			<a href="board.jsp?page=1">이전</a> <a href="board.jsp?page=1"
-				class="active">1</a> <a href="board.jsp?page=2">2</a> <a
-				href="board.jsp?page=3">3</a> <a href="board.jsp?page=4">4</a> <a
-				href="board.jsp?page=5">5</a> <a href="board.jsp?page=2">다음</a>
-		</div>
+
+		<%
+	if (currentPageGroup != 0) {
+	%>
+	<a href="bbsList.jsp?currentPage=<%=(currentPageGroup-1) * pagesPerPage+pagesPerPage%>">&lt;&lt;</a>
+	<%
+	}
+	%>
+
+	<%
+	for (int i = (currentPageGroup * pagesPerPage + 1); i <= currentPageGroup * pagesPerPage + pagesPerPage; i++) {
+	%>
+	&nbsp;&nbsp;<a href="bbsList.jsp?currentPage=<%=i%>"><%=i%></a>&nbsp;&nbsp;
+	<%
+	if (i == pagesCount) {
+		break;
+	}
+	}
+	%>
+	<%
+	if ((pagesCount / pagesPerPage) - (pagesCount % pagesPerPage == 0 ? 1 : 0) != currentPageGroup) {
+	%>
+	<a href="bbsList.jsp?currentPage=<%=(currentPageGroup+1) * pagesPerPage+1%>">&gt;&gt;</a>
+
+	<%
+	}
+	%>
 		<button class="write-button" onclick="location.href='bbsWrite.jsp';">글쓰기</button>
 	</div>
 

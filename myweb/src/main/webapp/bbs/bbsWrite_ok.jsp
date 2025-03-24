@@ -6,6 +6,10 @@
 <jsp:useBean id="bbsDAO" class="com.yong.bbs.BbsDAO"></jsp:useBean>
 
 <%
+//한글안됨 
+request.setCharacterEncoding("UTF-8");
+System.out.println(request.getParameter("title"));
+System.out.println(bbsDTO.getTitle());
 int result = bbsDAO.addPost(bbsDTO);
 %>
 <script>

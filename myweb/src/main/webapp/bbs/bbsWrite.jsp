@@ -39,7 +39,7 @@ if (postsPage == null || postsPage.length() == 0) {
 <body>
 	<%@include file="/header.jsp"%>
 	<h2>자유게시판 글쓰기</h2>
-	<form name="bbsWrite" action="bbsWrite_ok.jsp" method="post"
+	<form name="bbsWrite" action="bbsWrite_ok.jsp" method="post" accept-charset="UTF-8"
 		onsubmit="return validateForm()">
 
 		<div>

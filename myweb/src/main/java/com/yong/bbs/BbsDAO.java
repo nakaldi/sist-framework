@@ -11,8 +11,16 @@ import java.util.List;
 import com.yong.db.YongDB;
 
 public class BbsDAO {
-	public List<BbsDTO> findAllPosts() {
-		String sql = "SELECT * FROM posts";
+	/**
+	 * @return posts 테이블에서 id로 내림차순 정렬된 행들을 offset개 뒤부터 limit 개 뽑아서 리스트로 반환
+	 */
+	public List<BbsDTO> findPostsWithOffsetAndLimit(int offset, int limit) {
+//		String sql = "SELECT * FROM posts ORDER BY id DESC OFFSET " + offset + " FETCH FIRST " + limit + " ROWS ONLY";
+		String sql = "select * from ( "
+				+ "select rownum as rn, a.* from ( "
+				+ "	select * from posts order by id desc "
+				+ ") a "
+				+ ") where "+ offset +" <= rn AND rn < " + (offset+limit) + " ";
 		try (Connection conn = YongDB.getConn();
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();) {
@@ -43,6 +51,38 @@ public class BbsDAO {
 			return ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public BbsDTO findPostById(int id) {
+		String sql = "SELECT * FROM posts where id=?";
+		try (Connection conn = YongDB.getConn(); PreparedStatement ps = conn.prepareStatement(sql);) {
+			ps.setInt(1, id);
+			try (ResultSet rs = ps.executeQuery();) {
+				BbsDTO post = null;
+				if (rs.next()) {
+					post = new BbsDTO(rs.getInt("id"), rs.getString("title"), rs.getString("content"),
+							rs.getString("author"), rs.getString("pwd"),
+							rs.getTimestamp("created_at").toLocalDateTime(), rs.getInt("parent_id"), rs.getInt("depth"),
+							rs.getInt("order_num"), rs.getInt("view_count"));
+				}
+				return post;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int getCountFromPosts() {
+		String sql = "SELECT COUNT(*) FROM posts";
+		try (Connection conn = YongDB.getConn();
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery(sql);) {
+			rs.next();
+			return rs.getInt(1);
+		} catch (Exception e) {
 		}
 		return -1;
 	}
