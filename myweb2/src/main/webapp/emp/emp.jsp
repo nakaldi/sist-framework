@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.beom.emp.model.EmpDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -54,12 +57,25 @@
 
 	<form name="empSearch" action="empSearch.beom">
 		<fieldset>
-			<legend>사원삭제</legend>
+			<legend>사원검색</legend>
 			<table>
 				<tr>
 					<th>사원이름</th>
 					<td><input type="text" name="name" /></td>
 					<td><input type="submit" value="검색" /></td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
+
+	<form name="empUpdateFind" action="empUpdateFind.beom">
+		<fieldset>
+			<legend> 사원수정 </legend>
+			<table>
+				<tr>
+					<th>사원번호</th>
+					<td><input type="text" name="idx" /></td>
+					<td><input type="submit" value="사원수정" /></td>
 				</tr>
 			</table>
 		</fieldset>

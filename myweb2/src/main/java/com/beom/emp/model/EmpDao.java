@@ -69,4 +69,35 @@ public class EmpDao {
 			return null;
 		}
 	}
+
+	public EmpDto empUpdateFind(int idx) {
+		String sql = "SELECT * FROM employee WHERE idx = ? ";
+		try (Connection conn = BeomDB.getConn(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setInt(1, idx);
+			try (ResultSet rs = pstmt.executeQuery();) {
+				if (rs.next())
+					return new EmpDto(idx, rs.getString("name"), rs.getString("email"), rs.getString("dept"));
+			}
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public int empUpdate(EmpDto empDto) {
+		String sql = "UPDATE employee SET name = ?, email = ?, dept = ? WHERE idx = ?";
+		try (Connection conn = BeomDB.getConn(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, empDto.getName());
+			pstmt.setString(2, empDto.getEmail());
+			pstmt.setString(3, empDto.getDept());
+			pstmt.setInt(4, empDto.getIdx());
+			int count = pstmt.executeUpdate();
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
 }
