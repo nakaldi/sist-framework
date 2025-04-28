@@ -16,7 +16,9 @@ public class EmpAddAction implements CommandHandler {
 
 		EmpDto empDto = new EmpDto(0, req.getParameter("name"), req.getParameter("email"), req.getParameter("dept"));
 		EmpDao empDao = new EmpDao();
-		return empDao.empAdd(empDto) > 0 ? "사원등록성공" : "사원등록실패";
+		String msg = empDao.empAdd(empDto) > 0 ? "사원등록성공" : "사원등록실패";
+		req.setAttribute("msg", msg);
+		return "/emp/empMsg.jsp";
 	}
 
 }

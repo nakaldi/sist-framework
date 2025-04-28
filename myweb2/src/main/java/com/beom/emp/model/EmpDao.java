@@ -10,7 +10,7 @@ public class EmpDao {
 	}
 
 	public int empAdd(EmpDto empDto) {
-		String sql = "INSERT INTO employee VALUES(employee.idx.NEXTVAL, ?, ?, ?)";
+		String sql = "INSERT INTO employee VALUES(employee_idx.NEXTVAL, ?, ?, ?)";
 		try (Connection conn = BeomDB.getConn(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, empDto.getName());
 			pstmt.setString(2, empDto.getEmail());
