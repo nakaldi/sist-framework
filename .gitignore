@@ -1,5 +1,5 @@
 .metadata/
-build/
+/myweb2/build/
 .settings/
 .classpath
 .project

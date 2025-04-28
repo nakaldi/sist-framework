@@ -85,7 +85,7 @@ public class TestController extends HttpServlet {
 		String path = commandHandler.process(req, resp);
 
 		// 5. 전가하기(request에 저장했기 때문에 리다이렉트가 아닌 포워드로 전달해야함. )
-		RequestDispatcher rd = req.getRequestDispatcher("/test1/" + path);
+		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 	}
 }

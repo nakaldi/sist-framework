@@ -11,7 +11,7 @@ public class UpdateAction implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String result = "커맨드 패턴을 적용한 update 결과입니다.";
 		req.setAttribute("result", result);
-		return "update.jsp";
+		return "/test1/update.jsp";
 	}
 
 }

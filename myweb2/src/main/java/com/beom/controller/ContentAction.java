@@ -11,7 +11,7 @@ public class ContentAction implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String result = "커맨드 패턴을 적용한 content 결과입니다.";
 		req.setAttribute("result", result);
-		return "content.jsp";
+		return "/test1/content.jsp";
 	}
 
 }
