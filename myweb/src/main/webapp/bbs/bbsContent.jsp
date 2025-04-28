@@ -55,7 +55,8 @@ return;
 						</td>
 					</tr>
 					<tr height="50">
-						<td colspan="4" align="center">목록으로</td>
+						<td colspan="4" align="center">목록으로 | <a
+							href="bbsReWrite.jsp?title=<%=post.getTitle()%>&ref=<%=post.getRef()%>&depth=<%=post.getDepth()%>&orderNum=<%=post.getOrderNum()%>">답글쓰기</a></td>
 					</tr>
 				</table>
 			</fieldset>

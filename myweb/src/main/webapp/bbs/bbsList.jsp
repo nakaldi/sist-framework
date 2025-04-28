@@ -19,7 +19,6 @@ table {
 	margin: 0px auto;
 	border-top: 3px double darkblue;
 	border-bottom: 3px double darkblue;
-	text-align: center;
 }
 
 table th {
@@ -35,7 +34,7 @@ BbsDAO bbsDAO = new BbsDAO();
 String currentPage_str = request.getParameter("currentPage");
 int currentPage = currentPage_str==null?1:Integer.parseInt(currentPage_str);
 int postsCount = bbsDAO.getCountFromPosts();
-int postsPerPage = 5;
+int postsPerPage = 15;
 int pagesPerPage = 5;
 
 int pagesCount = (postsCount / postsPerPage) + 1;
@@ -64,7 +63,7 @@ if (currentPage % pagesPerPage == 0) {
 		<tbody>
 
 			<%
-			List<BbsDTO> posts = bbsDAO.findPostsWithOffsetAndLimit(currentPage*postsPerPage, postsPerPage);
+			List<BbsDTO> posts = bbsDAO.findPostsWithOffsetAndLimit((currentPage-1)*postsPerPage+1, postsPerPage);
 			if (posts == null || posts.size() == 0) {
 			%>
 			<tr>

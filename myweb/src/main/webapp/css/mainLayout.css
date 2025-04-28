@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 body {
-	width: 680px;
+	width: 100%;
 }
 
 header {
-	width: 680px;
+	width: 100%;
 }
 
 header div {
@@ -78,7 +78,7 @@ section {
 
 footer {
 	clear: both;
-	width: 680px;
+	width: 100%;
 }
 
 footer div {

@@ -9,7 +9,11 @@ request.setCharacterEncoding("UTF-8");
 <jsp:useBean id="bbsDAO" class="com.yong.bbs.BbsDAO"></jsp:useBean>
 
 <%
-bbsDTO.setRef(bbsDAO.getMaxRef() + 1);
+int ref = Integer.parseInt(request.getParameter("ref"));
+int depth = Integer.parseInt(request.getParameter("depth"));
+bbsDTO.setTitle(request.getParameter("title"));
+bbsDTO.setDepth(Integer.parseInt(request.getParameter("depth")) + 1);
+bbsDTO.setOrderNum(bbsDAO.getMaxOrderNumFromRefAndDepth(ref, depth+1) + 1);
 int result = bbsDAO.addPost(bbsDTO);
 %>
 <script>

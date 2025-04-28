@@ -30,21 +30,22 @@ div {
 }
 </style>
 </head>
-<%
-String postsPage = request.getParameter("page");
-if (postsPage == null || postsPage.length() == 0) {
-	postsPage = "1";
-}
-%>
 <body>
 	<%@include file="/header.jsp"%>
-	<h2>자유게시판 글쓰기</h2>
-	<form name="bbsWrite" action="bbsWrite_ok.jsp" method="post"
+	<h2>자유게시판 답글쓰기</h2>
+	<form name="bbsWrite" action="bbsReWrite_ok.jsp" method="post"
 		accept-charset="UTF-8" onsubmit="return validateForm()">
+		<input type="hidden" name="ref"
+			value="<%=request.getParameter("ref")%>" /> <input type="hidden"
+			name="depth" value="<%=request.getParameter("depth")%>" /> <input
+			type="hidden" name="orderNum"
+			value="<%=request.getParameter("orderNum")%>" />
+
+
 
 		<div>
 			<input type="text" class="full-width" name="title"
-				placeholder="제목을 입력하세요" />
+				value="RE)<%=request.getParameter("title")%>" />
 		</div>
 		<div>
 			<textarea name="content" rows="10" class="full-width"></textarea>

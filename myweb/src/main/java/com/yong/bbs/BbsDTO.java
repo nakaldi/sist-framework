@@ -9,7 +9,7 @@ public class BbsDTO {
 	private String author;
 	private String pwd;
 	private LocalDateTime createdAt; // LocalDateTime 사용 (날짜+시간)
-	private int parentId;
+	private int ref;
 	private int depth;
 	private int orderNum;
 	private int viewCount;
@@ -18,7 +18,7 @@ public class BbsDTO {
 	}
 
 	public BbsDTO(int id, String title, String content, String author, String pwd, LocalDateTime createdAt,
-			int parentId, int depth, int orderNum, int viewCount) {
+			int ref, int depth, int orderNum, int viewCount) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -26,7 +26,7 @@ public class BbsDTO {
 		this.author = author;
 		this.pwd = pwd;
 		this.createdAt = createdAt;
-		this.parentId = parentId;
+		this.ref = ref;
 		this.depth = depth;
 		this.orderNum = orderNum;
 	}
@@ -87,12 +87,12 @@ public class BbsDTO {
 		this.createdAt = createdAt;
 	}
 
-	public int getParentId() {
-		return parentId;
+	public int getRef() {
+		return ref;
 	}
 
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
+	public void setRef(int ref) {
+		this.ref = ref;
 	}
 
 	public int getDepth() {
