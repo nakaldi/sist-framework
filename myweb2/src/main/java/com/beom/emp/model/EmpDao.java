@@ -22,4 +22,16 @@ public class EmpDao {
 		return -1;
 	}
 
+	public int empDel(String name) {
+		String sql = "DELETE FROM employee WHERE name = ?";
+		try (Connection conn = BeomDB.getConn(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, name);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	
 }

@@ -31,5 +31,18 @@
 			</table>
 		</fieldset>
 	</form>
+	<hr />
+	<form name="empDel" action="empDel.beom">
+		<fieldset>
+			<legend>사원삭제</legend>
+				<table>
+					<tr>
+						<th>사원이름</th>
+						<td><input type="text" name="name" /></td>
+						<td><input type="submit" value="삭제" /></td>
+					</tr>
+				</table>
+		</fieldset>
+	</form>
 </body>
 </html>
