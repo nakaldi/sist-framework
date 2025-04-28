@@ -44,5 +44,10 @@
 				</table>
 		</fieldset>
 	</form>
+	<hr/>
+	<fieldset>
+	<legend>모든 사원 목록</legend>
+	<h3><a href="empList.beom">모든 사원 목록</a></h3>
+	</fieldset>
 </body>
 </html>

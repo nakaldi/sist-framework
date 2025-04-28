@@ -2,6 +2,9 @@ package com.beom.emp.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.beom.db.BeomDB;
 
@@ -33,5 +36,21 @@ public class EmpDao {
 		return -1;
 	}
 
-	
+	public List<EmpDto> empList() {
+		String sql = "SELECT * FROM employee ORDER BY idx DESC";
+		try (Connection conn = BeomDB.getConn();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery();) {
+			List<EmpDto> empDtos = new ArrayList<EmpDto>();
+			while (rs.next()) {
+				empDtos.add(new EmpDto(rs.getInt("idx"), rs.getString("name"), rs.getString("email"),
+						rs.getString("dept")));
+			}
+			return empDtos;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
