@@ -35,19 +35,34 @@
 	<form name="empDel" action="empDel.beom">
 		<fieldset>
 			<legend>사원삭제</legend>
-				<table>
-					<tr>
-						<th>사원이름</th>
-						<td><input type="text" name="name" /></td>
-						<td><input type="submit" value="삭제" /></td>
-					</tr>
-				</table>
+			<table>
+				<tr>
+					<th>사원이름</th>
+					<td><input type="text" name="name" /></td>
+					<td><input type="submit" value="삭제" /></td>
+				</tr>
+			</table>
 		</fieldset>
 	</form>
-	<hr/>
+	<hr />
 	<fieldset>
-	<legend>모든 사원 목록</legend>
-	<h3><a href="empList.beom">모든 사원 목록</a></h3>
+		<legend>모든 사원 목록</legend>
+		<h3>
+			<a href="empList.beom">모든 사원 목록</a>
+		</h3>
 	</fieldset>
+
+	<form name="empSearch" action="empSearch.beom">
+		<fieldset>
+			<legend>사원삭제</legend>
+			<table>
+				<tr>
+					<th>사원이름</th>
+					<td><input type="text" name="name" /></td>
+					<td><input type="submit" value="검색" /></td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
 </body>
 </html>

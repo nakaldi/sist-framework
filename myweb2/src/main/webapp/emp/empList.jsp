@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>모든 사원 목록</h2>
+	<h2>사원 목록</h2>
 	<fieldset>
 		<legend>사원 목록</legend>
 		<table border="1" cellspacing="0" width="550">

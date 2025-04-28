@@ -53,4 +53,20 @@ public class EmpDao {
 		}
 	}
 
+	public List<EmpDto> empSearch(String target) {
+		String sql = "SELECT * FROM employee WHERE name LIKE ?";
+		try (Connection conn = BeomDB.getConn(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, "%" + target + "%");
+			ResultSet rs = pstmt.executeQuery();
+			List<EmpDto> empDtos = new ArrayList<EmpDto>();
+			while (rs.next()) {
+				empDtos.add(new EmpDto(rs.getInt("idx"), rs.getString("name"), rs.getString("email"),
+						rs.getString("dept")));
+			}
+			return empDtos;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
