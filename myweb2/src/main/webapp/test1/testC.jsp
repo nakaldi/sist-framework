@@ -18,5 +18,10 @@
 	<h3><%=age %></h3>
 	<h3><%=tel %></h3>
 	<h3><%=addr %></h3>
+	
+	<h3>${param.name} </h3>
+	<h3>${parma.age }</h3>
+	<h3>${requestScope.addr }</h3>
+	<h3>${requestScope.tel }</h3>
 </body>
 </html>
