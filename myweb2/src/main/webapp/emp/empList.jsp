@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,27 +24,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%
-				List<EmpDto> empDtos = (ArrayList<EmpDto>) request.getAttribute("empDtos");
-				if (empDtos.size() == 0) {
-				%>
-				<tr>
-					<td colspan="4" align="center">등록된 사원이 없습니다</td>
-				</tr>
-				<%
-				} else {
-				for (EmpDto empDto : empDtos) {
-				%>
-				<tr>
-					<td><%=empDto.getIdx()%></td>
-					<td><%=empDto.getName()%></td>
-					<td><%=empDto.getEmail()%></td>
-					<td><%=empDto.getDept()%></td>
-				</tr>
-				<%
-				}
-				}
-				%>
+				<c:set var="empDtos" value="${requestScope.empDtos }"></c:set>
+				<c:if test="${empty empDtos }">
+					<tr>
+						<td colspan="4" align="center">등록된 사원이 없습니다</td>
+					</tr>
+				</c:if>
+				<c:forEach var="empDto" items="${empDtos }">
+					<tr>
+						<td>${empDto.idx}</td>
+						<td>${empDto.name}</td>
+						<td>${empDto.email}</td>
+						<td>${empDto.dept}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</fieldset>
