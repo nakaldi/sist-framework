@@ -15,7 +15,8 @@
 	<c:set var="num2">200</c:set>
 	<h3>num1:${num1 }</h3>
 	<h3>num2:${num2 }</h3>
-	<h3>num1+num2:${num1+num2 }</h3>
+	<!-- <h3>num1+num2:${num1+num2 }</h3> -->
+	
 
 	<%
 	//컨트롤러에서 넘어왔다는 가정
